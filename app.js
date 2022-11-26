@@ -34,7 +34,7 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
-// Item.deleteMany({name: 'Eat Food'}, (err) => {
+// Item.deleteMany({name: 'Hello'}, (err) => {
 //   if (err) {
 //     console.log(err);
 //   } else {
@@ -67,16 +67,14 @@ Item.find({}, (err, foundItems) => {
 
 app.post("/", function(req, res){
 
-  const item = req.body.newItem;
+  const itemName = req.body.newItem;
 
-  //не нужный код из v1
-  // if (req.body.list === "Work") {
-  //   workItems.push(item);
-  //   res.redirect("/work");
-  // } else {
-  //   items.push(item);
-  //   res.redirect("/");
-  // }
+  const item = new Item ({
+    name: itemName
+  });
+  item.save();
+  //что бы записи обновились в списке перенаправляем на главную страницу
+  res.redirect("/");
 });
 
 app.get("/work", function(req,res){
